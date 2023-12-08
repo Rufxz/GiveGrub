@@ -33,28 +33,7 @@ public class Contact extends AppCompatActivity {
     String userID;
     public static final String TAG = "TAG";
     TextInputLayout nameError, emailError, messageError;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact);
-        name = (EditText) findViewById(R.id.name);
-        email = (EditText) findViewById(R.id.email);
-        message = (EditText) findViewById(R.id.message);
-        submit = (Button) findViewById(R.id.submit);
-        nameError = (TextInputLayout) findViewById(R.id.nameError);
-        emailError = (TextInputLayout) findViewById(R.id.emailError);
-        messageError = (TextInputLayout) findViewById(R.id.messageError);
 
-        fAuth=FirebaseAuth.getInstance();
-        fStore= FirebaseFirestore.getInstance();
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SetValidation();
-            }
-        });
-    }
         public void SetValidation() {
 
             // Check for a valid name.
@@ -124,5 +103,28 @@ public class Contact extends AppCompatActivity {
                         });
             }
 
+
         }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_contact);
+        name = (EditText) findViewById(R.id.name);
+        email = (EditText) findViewById(R.id.email);
+        message = (EditText) findViewById(R.id.message);
+        submit = (Button) findViewById(R.id.submit);
+        nameError = (TextInputLayout) findViewById(R.id.nameError);
+        emailError = (TextInputLayout) findViewById(R.id.emailError);
+        messageError = (TextInputLayout) findViewById(R.id.messageError);
+
+        fAuth=FirebaseAuth.getInstance();
+        fStore= FirebaseFirestore.getInstance();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SetValidation();
+            }
+        });
+    }
     }

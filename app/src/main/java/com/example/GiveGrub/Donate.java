@@ -54,45 +54,8 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
     String userID;
     public static final String TAG = "TAG";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donate);
-        mFullName = findViewById(R.id.donorname);
-        mFoodItem = findViewById(R.id.fooditem);
-        mPhone = findViewById(R.id.phone);
-        mDescription = findViewById(R.id.description);
-        mSubmitBtn=findViewById(R.id.submit);
 
-        fAuth=FirebaseAuth.getInstance();
-        fStore= FirebaseFirestore.getInstance();
 
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mapFragment.getMapAsync(this);
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        buildGoogleApiClient();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-    }
-
-    protected synchronized void buildGoogleApiClient(){
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-    }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
@@ -173,6 +136,24 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
             }
         });
     }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        buildGoogleApiClient();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+    }
+
+    protected synchronized void buildGoogleApiClient(){
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -205,4 +186,25 @@ public class Donate extends AppCompatActivity implements OnMapReadyCallback, Goo
             }
         }
     }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_donate);
+        mFullName = findViewById(R.id.donorname);
+        mFoodItem = findViewById(R.id.fooditem);
+        mPhone = findViewById(R.id.phone);
+        mDescription = findViewById(R.id.description);
+        mSubmitBtn=findViewById(R.id.submit);
+
+        fAuth=FirebaseAuth.getInstance();
+        fStore= FirebaseFirestore.getInstance();
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mapFragment.getMapAsync(this);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        }
+    }
+
 }
