@@ -34,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class MyPin extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,  com.google.android.gms.location.LocationListener {
 
     private GoogleMap mMap;
+    public static final String TAG = "TAG";
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     LocationRequest mLocationRequest;
@@ -41,56 +42,10 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
     private int REQUEST_CODE = 11;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
-    public static final String TAG = "TAG";
+
     private FirebaseFirestore cloudstorage;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_pin);
-        fAuth= FirebaseAuth.getInstance();
 
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mapFragment.getMapAsync(this);
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-        }
-
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        buildGoogleApiClient();
-        mMap.setMyLocationEnabled(true);
-    }
-
-    protected synchronized void buildGoogleApiClient(){
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onLocationChanged(@NonNull Location location) {
-        mLastLocation = location;
-        showLocation();
-        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-
-        MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        //mMap.addMarker(markerOptions1).showInfoWindow();
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-        mMap.addMarker(markerOptions1).showInfoWindow();
-    }
 
     public void showLocation() {
         this.cloudstorage = FirebaseFirestore.getInstance();
@@ -133,6 +88,41 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
     }
 
     @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        buildGoogleApiClient();
+        mMap.setMyLocationEnabled(true);
+    }
+
+    protected synchronized void buildGoogleApiClient(){
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        mLastLocation = location;
+        showLocation();
+        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+
+        MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        //mMap.addMarker(markerOptions1).showInfoWindow();
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+        mMap.addMarker(markerOptions1).showInfoWindow();
+    }
+
+
+
+    @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -162,5 +152,19 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
                 Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_pin);
+        fAuth= FirebaseAuth.getInstance();
+
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mapFragment.getMapAsync(this);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        }
+
     }
 }
