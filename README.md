@@ -5,9 +5,10 @@ Welcome to GiveGrub, a platform connecting donors with surplus food to individua
 ## Features
 
 - User Registration and Profile Setup
-- Donation Listing and Matching
-- Pickup and Delivery Management
+- Donation Listing and Receive Requests
 - User Feedback and Ratings
+- Food Map to view the current Listings
+- History to check your listings
 
 ### Installation
 
