@@ -18,4 +18,4 @@ Welcome to GiveGrub, a platform connecting donors with surplus food to individua
 
 OR 
 
-2. Install the APK emulator to download the APK, and run it. Bluestacks is recommended.
+2. Install an APK emulator to download the APK, and run it. Bluestacks is recommended.
