@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ocean_green"
+    tools:context=".History">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="26sp"
+            android:textColor="@color/white"
+            android:layout_margin="15dp"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="ScrollViewSize">
+
+
+
+            <LinearLayout
+                android:id="@+id/showdata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/layout_bg"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:layout_marginHorizontal="20dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/text_color"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    tools:ignore="KeyboardInaccessibleWidget"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginVertical="15dp"
+                    android:text="@string/submit"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="20sp"
+                    android:background="@drawable/btn_bg"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView >

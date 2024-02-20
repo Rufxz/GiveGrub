@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "32244376564",
+    "project_id": "givegrub-56321",
+    "storage_bucket": "givegrub-56321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32244376564:android:13d584bfa1f74fb1f94fa1",
+        "android_client_info": {
+          "package_name": "com.example.GiveGrub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt-xnvH-HXih7f2xnqZqKF34kuJwqw5VA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
