@@ -14,3 +14,7 @@ Welcome to GiveGrub, a platform connecting donors with surplus food to individua
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/GiveGrub.git
+
+OR
+
+2. Download the APK via releases and install/run it on an android emulator
